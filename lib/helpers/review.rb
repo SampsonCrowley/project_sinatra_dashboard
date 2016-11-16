@@ -8,10 +8,12 @@ class Review
     results(build_url(company, ip, agent))
   end
 
-  def results(url)
-    HTTParty.get(url).body
-  end
   private
+
+    def results(url)
+      HTTParty.get(url).body
+    end
+
     def build_url(company, ip, agent)
       "#{BASE_URL}&q=#{company}&userip=#{ip}&useragent=#{agent}"
     end
