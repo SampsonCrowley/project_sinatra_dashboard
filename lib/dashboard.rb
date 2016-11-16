@@ -1,12 +1,17 @@
 require "sinatra/base"
 require_relative "helpers/scraper"
+require_relative "helpers/location"
 
 class Dashboard < Sinatra::Base
 
-  helpers Scraper
+  helpers Scraper, Location
 
   get "/" do
-    erb :index
+    ip = request.env['REMOTE_ADDR']
+    ip = `curl https://api.ipify.org`
+
+    location = get_location(ip)['zip_code']
+    erb :index, locals: { location: location }
   end
 
   get '/search' do
