@@ -26,7 +26,7 @@ class JobSaver
     contains = false
     CSV.foreach(path) do |row|
       if row[5] == job.job_id
-        contains = true 
+        contains = true
       end
     end
     contains
