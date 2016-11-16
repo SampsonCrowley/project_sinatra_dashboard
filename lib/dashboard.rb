@@ -4,14 +4,19 @@ require_relative "helpers/location"
 
 class Dashboard < Sinatra::Base
 
+  enable :sessions
+
   helpers Scraper, Location
 
   get "/" do
-    ip = request.env['REMOTE_ADDR']
-    ip = `curl https://api.ipify.org`
 
-    location = get_location(ip)['zip_code']
-    erb :index, locals: { location: location }
+    if session[:location] == nil
+      ip = request.env['REMOTE_ADDR']
+      ip = `curl https://api.ipify.org`
+      session[:location] = get_location(ip)['zip_code']
+    end
+
+    erb :index, locals: { location: session[:location] }
   end
 
   get '/search' do
@@ -21,7 +26,7 @@ class Dashboard < Sinatra::Base
 
   get '/results' do
     results_table = load_table
-    erb :results, locals: { results_table: results_table }
+    erb :results, locals: { results_table: results_table, location: session[:location] }
   end
 
   get '/company/:company' do

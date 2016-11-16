@@ -1,7 +1,16 @@
 require 'httparty'
 require 'pp'
 
-Company = Struct.new(:company_name, :website, :rating)
+Company = Struct.new(:company_name,
+                     :website,
+                     :overall,
+                     :culture_and_values,
+                     :senior_leadership,
+                     :compensation,
+                     :opportunities,
+                     :work_life_balance,
+                     :featured_review
+                     )
 class Review
 
   PARTNER_ID = "106891"
@@ -17,11 +26,30 @@ class Review
   private
 
     def build_company(results)
-      pp results
-      company_name = results['response']['employers'][0]['name']
-      website = results['response']['employers'][0]['website']
-      rating = results['response']['employers'][0]['overallRating']
-      Company.new(company_name, website, rating)
+      results = results['response']['employers'][0]
+      company_name = results['name']
+      website = results['website']
+      overall = results['overallRating']
+      culture_and_values = results["cultureAndValuesRating"]
+      senior_leadership = results["seniorLeadershipRating"]
+      compensation = results["compensationAndBenefitsRating"]
+      opportunities = results["careerOpportunitiesRating"]
+      work_life_balance = results["workLifeBalanceRating"]
+      featured_review = {
+                          date: results["featured_review"]["reviewDateTime"]
+                          headline: results["featured_review"]["headline"],
+                          pros: results["featured_review"]["pros"],
+                          cons: results["featured_review"]["cons"]
+                        }
+      Company.new(company_name,
+                  website, 
+                  overall,
+                  culture_and_values,
+                  senior_leadership,
+                  compensation,
+                  opportunities,
+                  work_life_balance,
+                  featured_review)
     end
 
     def results(url)
