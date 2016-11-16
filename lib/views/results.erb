@@ -4,10 +4,10 @@
 <table id="results-table">
   <thead>
     <% results_table.headers.each do |header| %>
-      <% unless %w(job_link company_id job_id).include?(header) %>
-      <th>
-        <%= header %>
-      </th>
+      <% unless [:job_link, :company_id, :job_id].include?(header) %>
+        <th>
+          <%= header %>
+        </th>
       <% end %>
     <% end %>
   </thead>
@@ -16,10 +16,10 @@
     <% results_table.each do |row| %>
       <tr class="result">
         <td>
-          <%= row[:title] %>
+          <a href="<%= row[:job_link] %>"><%= row[:title] %></a>
         </td>
         <td>
-          <%= row[:employer] %>
+          <a href="/company/<%= row[:employer] %>"><%= row[:employer] %></a>
         </td>
         <td>
           <%= row[:location] %>
@@ -31,3 +31,4 @@
     <% end %>
   </tbody>
 </table>
+
