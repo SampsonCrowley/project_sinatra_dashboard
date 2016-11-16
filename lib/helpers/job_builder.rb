@@ -24,7 +24,7 @@ class IndeedBuilder < JobBuilder
 
   def build(job_div)
     title = job_div.search("a").first.attr("title")
-    job_link = job_div.search("a").first.attr("href")
+    job_link = "http://indeed.com#{job_div.search("a").first.attr("href")}"
     employer = job_div.search(".company").text.strip
     location = job_div.search(".location").text.strip
     job_id = job_div.attr("id")

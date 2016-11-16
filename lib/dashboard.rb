@@ -21,7 +21,8 @@ class Dashboard < Sinatra::Base
 
   get '/company/:company' do
     ip, agent  = ENV['REMOTE_ADDR'], ENV['HTTP_USER_AGENT']
-    company_details(params[:company],ip, agent)
+    company = company_details(params[:company],ip, agent)
+    erb :show_company, :locals => { company: company }
   end
 
   run!

@@ -24,10 +24,9 @@ module Scraper
 
     dice_jobs = dice_b.build_jobs(dice.search(query))
     indeed_jobs = indeed_b.build_jobs(indeed.search(query))
+    jobs = [dice_jobs, indeed_jobs].flatten
 
-
-    saver.save(FILE_PATH, dice_jobs)
-    saver.save(FILE_PATH, indeed_jobs)
+    saver.save(FILE_PATH, jobs)
   end
 
   def load_table
