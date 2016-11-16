@@ -13,15 +13,21 @@ require_relative "helpers/scraper"
     erb :index
   end
 
-  get '/search' do 
+  get '/search' do
+    
     query = params[:query]
-    scrape(query)
+    scrape(query
     redirect("/results")
   end
 
-  get '/results' do 
+  get '/results' do
     results_table = load_table
     puts results_table.class
     erb :results, :locals => { :results_table => results_table }
+  end
+
+  get '/company/:company' do
+    ip, agent  = ENV['REMOTE_ADDR'], ENV['HTTP_USER_AGENT']
+    company_details(params[:company],ip, agent)
   end
 # end

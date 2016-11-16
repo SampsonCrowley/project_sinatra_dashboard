@@ -11,7 +11,7 @@ module Scraper
 
   FILE_PATH = File.expand_path("../../../data/jobs_table.csv", __FILE__)
 
-  def scrape(query)
+  def scrape(query, ip, agent)
     dice     = DiceAgent.new
     indeed   = IndeedAgent.new
     dice_b   = DiceBuilder.new
