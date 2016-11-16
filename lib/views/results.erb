@@ -16,10 +16,10 @@
     <% results_table.each do |row| %>
       <tr class="result">
         <td>
-          <%= row[:title] %>
+          <a href="<%= row[:job_link] %>"><%= row[:title] %></a>
         </td>
         <td>
-          <%= row[:employer] %>
+          <a href="/company/<%= row[:employer] %>"><%= row[:employer] %></a>
         </td>
         <td>
           <%= row[:location] %>
@@ -31,3 +31,4 @@
     <% end %>
   </tbody>
 </table>
+
