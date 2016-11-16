@@ -1,0 +1,33 @@
+<!--[:title, :job_link, :employer, :location, :company_id, :job_id, :posted_at] -->
+
+<h1>Search Results</h1>
+<table id="results-table">
+  <thead>
+    <% results_table.headers.each do |header| %>
+      <% unless %w(job_link company_id job_id).include?(header) %>
+      <th>
+        <%= header %>
+      </th>
+      <% end %>
+    <% end %>
+  </thead>
+
+  <tbody>
+    <% results_table.each do |row| %>
+      <tr class="result">
+        <td>
+          <%= row[:title] %>
+        </td>
+        <td>
+          <%= row[:employer] %>
+        </td>
+        <td>
+          <%= row[:location] %>
+        </td>
+        <td>
+          <%= row[:posted_at] %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
