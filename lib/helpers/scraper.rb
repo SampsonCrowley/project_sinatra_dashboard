@@ -14,7 +14,7 @@ module Scraper
 
 
 
-  def scrape(query)
+  def scrape(query, location = nil)
     dice     = DiceAgent.new
     indeed   = IndeedAgent.new
     dice_b   = DiceBuilder.new
@@ -22,8 +22,8 @@ module Scraper
     saver    = JobSaver.new
     
 
-    dice_jobs = dice_b.build_jobs(dice.search(query))
-    indeed_jobs = indeed_b.build_jobs(indeed.search(query))
+    dice_jobs = dice_b.build_jobs(dice.search(query, location))
+    indeed_jobs = indeed_b.build_jobs(indeed.search(query, location))
     jobs = [dice_jobs, indeed_jobs].flatten
 
     saver.save(FILE_PATH, jobs)

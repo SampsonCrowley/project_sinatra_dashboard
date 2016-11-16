@@ -10,7 +10,7 @@ class Dashboard < Sinatra::Base
   end
 
   get '/search' do
-    scrape(params[:query])
+    scrape(params[:query], params[:area])
     redirect("/results")
   end
 

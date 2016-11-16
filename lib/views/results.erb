@@ -1,8 +1,9 @@
 <!--[:title, :job_link, :employer, :location, :company_id, :job_id, :posted_at] -->
 
 <h1>Search Results</h1>
-<table id="results-table">
+<table id="results-table" class="display" cellspacing="0" width="100%">
   <thead>
+    <tr>
     <% results_table.headers.each do |header| %>
       <% unless [:job_link, :company_id, :job_id].include?(header) %>
         <th>
@@ -10,6 +11,7 @@
         </th>
       <% end %>
     <% end %>
+    </tr>
   </thead>
 
   <tbody>
@@ -31,4 +33,10 @@
     <% end %>
   </tbody>
 </table>
+
+<script>
+  $(document).ready(function() {
+    $("#results-table").DataTable();
+} );
+</script>
 
