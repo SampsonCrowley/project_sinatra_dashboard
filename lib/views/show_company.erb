@@ -26,10 +26,21 @@
   <p>Website: <%= company.website %></p>
 
 
-  <div class="rating">
-    <span class="filled">☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-  </div>
-  <p>Overall Rating: <%= company.overall %></p>
+  <% company.ratings.each do |name, rating| %>
+    <h4><%= name.to_s %></h4>
+    <%= erb :_rating_stars, locals: { rating: rating }%>
+  <% end %>
+
+  <% if company.featured_review %>
+    <div>
+      <h3>Featured Review: <%= company.featured_review.headline %></h3>
+      <p>Posted on <%= company.featured_review.date %></p>
+      <h4>Pros:</h4>
+      <p><%= company.featured_review.pros %></p>
+      <h4>Cons:</h4>
+      <p><%= company.featured_review.cons %></p>
+    </div>
+  <% end %>
 
   <a href='https://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
 <% end %>

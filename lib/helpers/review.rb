@@ -3,12 +3,7 @@ require 'pp'
 
 Company = Struct.new(:company_name,
                      :website,
-                     :overall,
-                     :culture_and_values,
-                     :senior_leadership,
-                     :compensation,
-                     :opportunities,
-                     :work_life_balance,
+                     :ratings,
                      :featured_review
                      )
 class Review
@@ -29,12 +24,13 @@ class Review
       results = results['response']['employers'][0]
       company_name = results['name']
       website = results['website']
-      overall = results['overallRating']
-      culture_and_values = results["cultureAndValuesRating"]
-      senior_leadership = results["seniorLeadershipRating"]
-      compensation = results["compensationAndBenefitsRating"]
-      opportunities = results["careerOpportunitiesRating"]
-      work_life_balance = results["workLifeBalanceRating"]
+      ratings = {}
+      ratings["Overall Rating"] = results['overallRating']
+      ratings["Culture and Values"] = results["cultureAndValuesRating"]
+      ratings["Senior Leadership"] = results["seniorLeadershipRating"]
+      ratings["Compensation"] = results["compensationAndBenefitsRating"]
+      ratings["Opportunities"] = results["careerOpportunitiesRating"]
+      ratings["Work life balance"] = results["workLifeBalanceRating"]
       featured_review = {
                           date: results["featured_review"]["reviewDateTime"],
                           headline: results["featured_review"]["headline"],
@@ -43,12 +39,7 @@ class Review
                         } if results["featured_review"]
       Company.new(company_name,
                   website,
-                  overall,
-                  culture_and_values,
-                  senior_leadership,
-                  compensation,
-                  opportunities,
-                  work_life_balance,
+                  ratings,
                   featured_review)
     end
 

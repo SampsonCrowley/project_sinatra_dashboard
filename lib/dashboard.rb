@@ -1,5 +1,5 @@
 require "sinatra/base"
-require_relative "helpers/scraper"
+require_relative "helpers/scraper"  
 require_relative "helpers/location"
 
 class Dashboard < Sinatra::Base
@@ -21,12 +21,12 @@ class Dashboard < Sinatra::Base
 
   get '/search' do
     scrape(params[:query], params[:area])
-    redirect("/results")
+    redirect("/results/#{params[:area]}")
   end
 
-  get '/results' do
+  get '/results/:area' do
     results_table = load_table
-    erb :results, locals: { results_table: results_table, location: session[:location] }
+    erb :results, locals: { results_table: results_table, location: params[:area] }
   end
 
   get '/company/:company' do

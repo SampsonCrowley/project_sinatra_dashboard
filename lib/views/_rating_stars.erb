@@ -1,0 +1,8 @@
+<div class="rating">
+    <% rating.to_f.to_int.times do %>
+      <span class="filled">☆</span>
+    <% end %>
+    <% (5 - rating.to_f.to_int).times do %>
+      <span>☆</span>
+    <% end %>
+</div>
