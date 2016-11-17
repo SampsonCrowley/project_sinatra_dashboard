@@ -32,11 +32,11 @@ class Review
       ratings["Opportunities"] = results["careerOpportunitiesRating"]
       ratings["Work life balance"] = results["workLifeBalanceRating"]
       featured_review = {
-                          date: results["featured_review"]["reviewDateTime"],
-                          headline: results["featured_review"]["headline"],
-                          pros: results["featured_review"]["pros"],
-                          cons: results["featured_review"]["cons"]
-                        } if results["featured_review"]
+                          date: results["featuredReview"]["reviewDateTime"],
+                          headline: results["featuredReview"]["headline"],
+                          pros: results["featuredReview"]["pros"],
+                          cons: results["featuredReview"]["cons"]
+                        } if results["featuredReview"]
       Company.new(company_name,
                   website,
                   ratings,

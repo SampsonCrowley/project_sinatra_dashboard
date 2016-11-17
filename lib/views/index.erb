@@ -1,9 +1,2 @@
 <h1>Job Hunt Dashboard</h1>
-<h2></h2>
-<form method="get" action="/search">
-  <label for="search">Search for:</label>
-  <input name="query" id="search">
-  <label for="area">Near:</label>
-  <input name="area" id="area"<% if location.length > 0 %> value="<%= location %>"<% end %>>
-  <button type="submit">Search</button>
-</form>
+<%= erb :_search_form, locals: {location: location} %>

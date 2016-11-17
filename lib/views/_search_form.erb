@@ -1,0 +1,19 @@
+<style>
+  input {
+    border-radius: 4px;
+    box-shadow: 2px 2px 4px #333;
+    margin-right: 10px;
+  }
+  button {
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+</style>
+
+<form method="get" action="/search">
+  <label for="search">Search for:</label>
+  <input name="query" id="search">
+  <label for="area">Near:</label>
+  <input name="area" id="area"<% if location %> value="<%= location %>"<% end %>>
+  <button type="submit">Search</button>
+</form>

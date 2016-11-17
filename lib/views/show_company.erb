@@ -16,31 +16,52 @@
   left: 0;
   color: gold;
 }
+.review {
+  margin: auto;
+  padding: 50px;
+  width: 80%;
+}
+.star-ratings > div {
+  display: inline-block;
+  margin-left: 10px;
+}
+.glassdoor { 
+  margin-top:20px;
+  float: right;
+ }
 </style>
+
+<%= erb :_search_form, locals: {location: location} %>
+
+<div class="review">
 <% unless company %>
   <h1>No reviews for this company.</h1>
 <% else %>
 
-  <h1><%= company.company_name %> details:</h1>
+  <h1>Company Review: <%= company.company_name.capitalize %></h1>
 
-  <p>Website: <%= company.website %></p>
+  <p><a href="<%= company.website %>"><%= company.website %></a></p>
 
-
-  <% company.ratings.each do |name, rating| %>
-    <h4><%= name.to_s %></h4>
-    <%= erb :_rating_stars, locals: { rating: rating }%>
-  <% end %>
+  <div class="star-ratings">
+    <% company.ratings.each do |name, rating| %>
+      <div>
+        <h4><%= name.to_s %></h4>
+        <%= erb :_rating_stars, locals: { rating: rating }%>
+      </div>
+    <% end %>
+  </div>
 
   <% if company.featured_review %>
     <div>
-      <h3>Featured Review: <%= company.featured_review.headline %></h3>
-      <p>Posted on <%= company.featured_review.date %></p>
+      <h3>Featured Review: <%= company.featured_review[:headline] %></h3>
+      <p>Posted on <%= Time.parse(company.featured_review[:date]).strftime("%B %d, %Y") %></p>
       <h4>Pros:</h4>
-      <p><%= company.featured_review.pros %></p>
+      <p><%= company.featured_review[:pros] %></p>
       <h4>Cons:</h4>
-      <p><%= company.featured_review.cons %></p>
+      <p><%= company.featured_review[:cons] %></p>
     </div>
   <% end %>
-
-  <a href='https://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
+  <a class="glassdoor" href='https://www.glassdoor.com/index.htm'>powered by: <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
+</div>
+  
 <% end %>
