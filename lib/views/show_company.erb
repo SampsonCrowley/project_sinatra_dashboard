@@ -1,3 +1,22 @@
+<style>
+.rating {
+  unicode-bidi: bidi-override;
+}
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+}
+.rating > span.filled{
+  color: transparent;
+}
+.rating > span.filled::before {
+  content: "\2605";
+  position: absolute;
+  left: 0;
+  color: gold;
+}
+</style>
 <% unless company %>
   <h1>No reviews for this company.</h1>
 <% else %>
@@ -6,7 +25,11 @@
 
   <p>Website: <%= company.website %></p>
 
-  <p>Overall Rating: <%= company.rating %></p>
+
+  <div class="rating">
+    <span class="filled">☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+  </div>
+  <p>Overall Rating: <%= company.overall %></p>
 
   <a href='https://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
 <% end %>

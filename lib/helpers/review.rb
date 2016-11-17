@@ -36,13 +36,13 @@ class Review
       opportunities = results["careerOpportunitiesRating"]
       work_life_balance = results["workLifeBalanceRating"]
       featured_review = {
-                          date: results["featured_review"]["reviewDateTime"]
+                          date: results["featured_review"]["reviewDateTime"],
                           headline: results["featured_review"]["headline"],
                           pros: results["featured_review"]["pros"],
                           cons: results["featured_review"]["cons"]
-                        }
+                        } if results["featured_review"]
       Company.new(company_name,
-                  website, 
+                  website,
                   overall,
                   culture_and_values,
                   senior_leadership,
